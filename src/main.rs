@@ -81,7 +81,7 @@ struct AttackObject {
     impact_type: Option<Vec<String>>,
     #[serde(rename = "source_ref")]
     source_ref: Option<String>,
-    #[serde(rename = "targer_ref")]
+    #[serde(rename = "target_ref")]
     target_ref: Option<String>,
     #[serde(rename = "relationship_type")]
     relationship_type: Option<String>,
@@ -209,7 +209,7 @@ fn print_technique_info(obj: &AttackObject, data: &AttackData) {
     if let Some(tactics) = &obj.kill_chain_phases {
         println!("\n{}", "Tácticas:".bright_white().bold());
         for tactic in tactics {
-            if tactic.kill_chain_name == "mitre_attack" {
+            if tactic.kill_chain_name == "mitre-attack" {
                 println!("  • {}", tactic.phase_name.bright_magenta());
             }
         }
@@ -307,7 +307,7 @@ fn print_group_info(obj: &AttackObject, data: &AttackData) {
         for technique in &related_techniques {
             if let Some(phases) = &technique.kill_chain_phases {
                 for phase in phases {
-                    if phase.kill_chain_name == "mitre_attack" {
+                    if phase.kill_chain_name == "mitre-attack" {
                         let tactic_name = phase.phase_name.replace("-", " ");
                         let tactic_name = tactic_name.split_whitespace()
                         .map(|s| s.chars().next().unwrap().to_uppercase().collect::<String>() + &s[1..])
