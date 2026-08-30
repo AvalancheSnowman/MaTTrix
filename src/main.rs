@@ -517,6 +517,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                             print_separator();
                         }
                         print_tactic_info(obj);
+                        found = true;
                     }
                 }
 
