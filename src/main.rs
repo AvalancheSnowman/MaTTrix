@@ -508,31 +508,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let name_lower = name.to_lowercase().replace("-", "_").replace(" ", "_");
         let mut found = false;
 
-        // Primera búsqueda por X táctica mitre
         for obj in &data.objects {
-            if obj.obj_type == "x-mitre-tactic" {
-                if let Some(obj_name) = &obj.name {
-                    if obj_name.to_lowercase().replace("-", "_").replace(" ", "_").contains(&name_lower) {
-                        if found {
-                            print_separator();
-                        }
-                        print_tactic_info(obj);
-                        found = true;
-                    }
-                }
-
-                if let Some(shortname) = &obj.shortname {
-                    if shortname.to_lowercase().replace("-", "_").contains(&name_lower) {
-                        if found {
-                            print_separator();
-                        }
-                        print_tactic_info(obj);
-                        found = true;
-                    }
-                }
+            if obj.obj_type != "x-mitre.tactic" {
+                continue;
             }
-        }
+            
+        let name_matches = obj.name.as_ref()
+        .map(|n| n.to_lowercase().replace("-", "_").replace(" ", "_").contains(&name_lower))
+        .unwrap_or(false);
 
+        let shorname_matches = obj.shortname.as_ref()
+            .map(|s| s.to_lowercase().replace("-", "_").contains(&name_lower))
+            .unwrap_or(false);
+
+        if name_matches || shorname_matches {
+            if found {
+                print_separator();
+            }
+            print_tactic_info(obj);
+            found = true;
+        }
+    }
         // Si hay match cen la búsqueda de táctica, muestra técnicas relacionadas
 
         if found {
