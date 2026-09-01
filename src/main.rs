@@ -509,7 +509,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut found = false;
 
         for obj in &data.objects {
-            if obj.obj_type != "x-mitre.tactic" {
+            if obj.obj_type != "x-mitre-tactic" {
                 continue;
             }
             
