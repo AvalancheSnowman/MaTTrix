@@ -60,37 +60,16 @@ mattrix <comando> [argumentos]
 El programa sigue un flujo lineal en cada ejecución: carga el archivo de datos local, interpreta el comando solicitado, filtra los objetos correspondientes dentro de esos datos y presenta el resultado por terminal.
 
 ```mermaid
-flowchart TD
-    A[Inicio] --> B[Parsear argumentos de linea de comandos]
-    B --> C{Existe ~/.mitre/matrix.json?}
-    C -- No --> D[Mostrar error: archivo no encontrado]
-    D --> Z[Fin]
-    C -- Si --> E[Leer y parsear el JSON en memoria]
-    E --> F{Que subcomando se ejecuto?}
-    F -- apt-list --> G[Listar todos los objetos intrusion-set]
-    F -- apt --> H[Buscar grupo por nombre o alias]
-    F -- tid --> I[Buscar tecnica por ID de MITRE]
-    F -- tn --> J[Buscar tecnicas por nombre]
-    F -- tac --> K[Buscar tactica por nombre o abreviatura]
-    H --> L[Resolver relaciones uses del grupo]
-    I --> M[Resolver relaciones uses de la tecnica]
-    L --> N[Imprimir resultado formateado]
-    M --> N
-    G --> N
-    J --> N
-    K --> N
-    N --> Z[Fin]
-```
-
-Los datos descargados desde MITRE siguen el formato STIX 2.x: un único archivo JSON con una lista plana de objetos de distintos tipos (grupo, técnica, táctica, relación, entre otros). El CLI no reorganiza estos datos en una base de datos ni los indexa; en cada consulta recorre la lista completa filtrando por tipo de objeto y por los criterios de búsqueda indicados. Las relaciones entre un grupo y las técnicas que utiliza no están dentro del propio objeto del grupo ni de la técnica, sino en objetos independientes de tipo `relationship`, que el programa cruza en tiempo de consulta:
-
-```mermaid
 flowchart LR
     G["Grupo (intrusion-set)\nid: intrusion-set--xxxx"] -- "relationship: uses" --> T["Tecnica (attack-pattern)\nid: attack-pattern--yyyy"]
     T -- "kill_chain_phases" --> TA["Tactica (x-mitre-tactic)\nphase_name"]
     G -- "external_references" --> ID1["MITRE ID (ej. G0007)"]
     T -- "external_references" --> ID2["MITRE ID (ej. T1055)"]
 ```
+
+
+Los datos descargados desde MITRE siguen el formato STIX 2.x: un único archivo JSON con una lista plana de objetos de distintos tipos (grupo, técnica, táctica, relación, entre otros). El CLI no reorganiza estos datos en una base de datos ni los indexa; en cada consulta recorre la lista completa filtrando por tipo de objeto y por los criterios de búsqueda indicados. Las relaciones entre un grupo y las técnicas que utiliza no están dentro del propio objeto del grupo ni de la técnica, sino en objetos independientes de tipo `relationship`, que el programa cruza en tiempo de consulta:
+
 
 ## Roadmap
 
