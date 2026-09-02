@@ -3,17 +3,6 @@
 version = 4
 
 [[package]]
-name = "MITTRE_CLI"
-version = "0.1.0"
-dependencies = [
- "clap",
- "colored",
- "dirs",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "anstream"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -187,6 +176,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28d0a00925a9f930d679b6789b721e3a7f9ed110f41b86d2497caa780c3a070a"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "mattrix"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "colored",
+ "dirs",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
