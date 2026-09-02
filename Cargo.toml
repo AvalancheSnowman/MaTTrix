@@ -1,5 +1,13 @@
 [package]
-name = "MITTRE_CLI"
+name = "mattrix"
+repository = "https://github.com/AvalancheSnowman/MaTTrix"
+keywords = ["MITRE", "MITRE-ATT&CK", "STIX", "terminal", "CLI", "Rust"]
+readme = "README:md"
+categories = ["command-line-interface"]
+description = ["CLI en Rust para consultar información de la matriz MITRE-ATT&CK directamente desde la terminal."]
+license = "MIT"
+authors = ["Avalanche Snowman <snowmanflake2@gmail.com>"]
+exclude = ["*.log", ".github"]
 version = "0.1.0"
 edition = "2024"
 
