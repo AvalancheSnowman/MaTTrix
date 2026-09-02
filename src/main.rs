@@ -7,8 +7,8 @@ use std::path::PathBuf;
 
 
 #[derive(Parser)]
-#[command(name = "mitre")]
-#[command(about = "CLI de búsqueda en la Matrix MITRE")]
+#[command(name = "mattrix")]
+#[command(about = "CLI de búsqueda offline en la Matrix MITRE ATT&CK")]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -28,7 +28,7 @@ enum Commands {
     #[command(name = "tid")]
     TecId { id: String},
     // Muestra info de la técnica basada en nombre
-    #[command(name = "tn")]
+    #[command(name = "tin")]
     TecName { name: String},
     // Muestra info sobre la táctica (e., persistencia, privilege-scalation)
     #[command(name = "tac")]
@@ -63,10 +63,6 @@ struct AttackObject {
     version: Option<String>,
     #[serde(rename = "x_mitre_deprecated")]
     deprecated: Option<bool>,
-    #[serde(rename = "x_mitre_detection")]
-    detection: Option<String>,
-    #[serde(rename = "x_mitre_data_source")]
-    data_sources: Option<Vec<String>>,
     #[serde(rename = "x_mitre_effective_permissions")]
     effective_permissions: Option<Vec<String>>,
     #[serde(rename = "x_mitre_permissions_required")]
@@ -134,7 +130,7 @@ fn get_mitre_id(obj: &AttackObject) -> Option<String> {
 fn get_related_techniques<'a>(group_id: &str, data: &'a AttackData) -> Vec<&'a AttackObject> {
     let mut related_techniques_ids = Vec::new();
 
-    // Buscar todas las relaciones en las que un grupo sea tanto la fuente como el patrón de ataque de desitno
+    // Buscar todas las relaciones en las que un grupo sea tanto la fuente como el patrón de ataque de destino
 
     for obj in &data.objects {
         if obj.obj_type == "relationship" {
@@ -222,24 +218,6 @@ fn print_technique_info(obj: &AttackObject, data: &AttackData) {
         }
     }
 
-    if let Some(perms) = &obj.permissions_required {
-        println!("\n{}", "Permisos Requeridos:".bright_white().bold());
-        for perm in perms {
-            println!("  • {}", perm.bright_red());
-        }
-    }
-
-    if let Some(detection) = &obj.detection {
-        println!("\n{}", "Detección:".bright_white().bold());
-        println!("{}", detection);
-    }
-
-    if let Some(data_sources) = &obj.data_sources {
-        println!("\n{}", "Data Sources:".bright_white().bold());
-        for source in data_sources {
-            println!("  • {}", source.bright_cyan());
-        }
-    }
 
     // Mostrar qué grupos utilizan la técnica buscada
 
