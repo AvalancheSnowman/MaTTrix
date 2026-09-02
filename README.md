@@ -52,7 +52,7 @@ mattrix <comando> [argumentos]
 | `apt-list` | `mattrix apt-list` | Lista todos los grupos APT disponibles en los datos. |
 | `apt <nombre>` | `mattrix apt APT28` | Consulta un grupo por nombre o alias (búsqueda parcial, sin distinguir mayúsculas). Muestra nombre, ID de MITRE, alias, descripción, técnicas utilizadas agrupadas por táctica, total de técnicas y referencias externas. |
 | `tid <id>` | `mattrix tid T1055` | Consulta una técnica por su ID de MITRE. Muestra nombre, descripción, tácticas asociadas, plataformas y los grupos que la utilizan. |
-| `tn <texto>` | `mattrix tn "process injection"` | Busca técnicas cuyo nombre contiene el texto indicado; puede haber más de un resultado. |
+| `tin <texto>` | `mattrix tn "process injection"` | Busca técnicas cuyo nombre contiene el texto indicado; puede haber más de un resultado. |
 | `tac <nombre>` | `mattrix tac persistence` | Consulta una táctica y muestra las técnicas asociadas a ella. |
 
 ## Funcionamiento interno
