@@ -1,6 +1,6 @@
 # MaTTrix
 
-CLI en Rust para consultar información de la matriz MITRE ATT&CK (Enterprise) directamente desde la terminal: grupos de amenazas (APT), técnicas, tácticas y las relaciones entre ellos, a partir de los datos oficiales publicados por MITRE en formato STIX.
+CLI en Rust para consultar información de la matriz MITRE ATT&CK directamente desde la terminal: grupos de amenazas (APT), técnicas, tácticas y las relaciones entre ellos, a partir de los datos oficiales publicados por MITRE en formato STIX.
 
 ## Requisitos
 
@@ -12,7 +12,7 @@ CLI en Rust para consultar información de la matriz MITRE ATT&CK (Enterprise) d
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/<usuario>/mattrix.git
+git clone https://github.com/AvalancheSnowman/MaTTrix
 cd mattrix
 ```
 
@@ -68,7 +68,7 @@ flowchart LR
 ```
 
 
-Los datos descargados desde MITRE siguen el formato STIX 2.x: un único archivo JSON con una lista plana de objetos de distintos tipos (grupo, técnica, táctica, relación, entre otros). El CLI no reorganiza estos datos en una base de datos ni los indexa; en cada consulta recorre la lista completa filtrando por tipo de objeto y por los criterios de búsqueda indicados. Las relaciones entre un grupo y las técnicas que utiliza no están dentro del propio objeto del grupo ni de la técnica, sino en objetos independientes de tipo `relationship`, que el programa cruza en tiempo de consulta:
+Los datos descargados desde MITRE siguen el formato STIX 2.x: un único archivo JSON con una lista plana de objetos de distintos tipos (grupo, técnica, táctica, relación, entre otros). El CLI no reorganiza estos datos en una base de datos ni los indexa; en cada consulta recorre la lista completa filtrando por tipo de objeto y por los criterios de búsqueda indicados. Las relaciones entre un grupo y las técnicas que utiliza no están dentro del propio objeto del grupo ni de la técnica, sino en objetos independientes de tipo `relationship`, que el programa cruza en tiempo de consulta.
 
 
 ## Roadmap
